@@ -132,10 +132,7 @@ public class RegionController {
             (
                     @PathVariable(value = "id")Integer id
             )
-    {
-        // mendapatkan data
-        Region region = regionService.getById(id);
-        
+    { 
         // deleting data
         regionService.delete(id);
 
@@ -143,8 +140,8 @@ public class RegionController {
         return ResponseHandler.customResponse
         (
             "sucess deleted", 
-            HttpStatus.OK, 
-            region
+            HttpStatus.OK,
+            null
         );
     }
 }

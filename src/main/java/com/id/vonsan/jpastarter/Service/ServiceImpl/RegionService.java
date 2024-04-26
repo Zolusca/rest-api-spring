@@ -3,6 +3,9 @@ package com.id.vonsan.jpastarter.Service.ServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import com.id.vonsan.jpastarter.DTO.ApiErrorException;
+import com.id.vonsan.jpastarter.Exception.AlreadyExistException;
+import com.id.vonsan.jpastarter.Exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,9 +29,7 @@ public class RegionService implements ServiceGeneric<Region,Integer> {
 
         // jika ada maka terkena exception
         if(result.isPresent()){
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "Name already exists");
+            throw new AlreadyExistException("Name already exists");
         }
 
         // melakukan insert
@@ -41,10 +42,7 @@ public class RegionService implements ServiceGeneric<Region,Integer> {
         Region region = regionRepository
                                 .findById(id)
                                 .orElseThrow(
-                                    ()->new ResponseStatusException(
-                                        HttpStatus.NOT_FOUND,
-                                        "Region NOT found"));
-        
+                                    ()->new NotFoundException("region tidak ditemukan"));
         // delete data
         regionRepository.delete(region);
     }
@@ -64,9 +62,6 @@ public class RegionService implements ServiceGeneric<Region,Integer> {
         return regionRepository
                     .findById(id)
                     .orElseThrow(() ->
-                        new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Region not found")
-                    );
+                        new NotFoundException("region tidak ditemukan"));
     }
 }

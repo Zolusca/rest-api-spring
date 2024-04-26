@@ -5,11 +5,23 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CountryRequest {
-    @NotBlank @Size(max = 2, message = "length for code maximum 2 characther")
+    @NotBlank(message = "code cannot be blank") 
+    @Size
+    (
+        max = 2,
+        min = 2,
+        message = "code size must be 2 characther"
+    )
     private String code;
-    @NotBlank @Size(max = 20, message = "length for name maximum 20 characther")
+    @NotBlank(message = "name cannot be blank")
+    @Size
+    (
+        max = 20,
+        min = 5, 
+        message = "name size atleast min 5 and max 20 characther"
+    )
     private String name;
-    @NotNull
+    @NotNull(message = "region id cannot be null")
     private Integer region;
     
     public CountryRequest() {
