@@ -45,4 +45,10 @@ public class CountryRequest {
     public void setRegion(Integer region) {
         this.region = region;
     }
+
+    @Override
+    public String toString() {
+        return "CountryRequest [code=" + code + ", name=" + name + ", region=" + region + "]";
+    }
+    
 }

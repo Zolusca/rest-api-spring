@@ -29,9 +29,12 @@ import com.id.vonsan.jpastarter.Service.ServiceImpl.CountryService;
 import com.id.vonsan.jpastarter.Service.ServiceImpl.RegionService;
 import com.id.vonsan.jpastarter.Util.StringOperation;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @RestController
 @RequestMapping("/countries")
+@Slf4j
 public class CountryController {
     
     @Autowired
@@ -70,6 +73,8 @@ public class CountryController {
                     @RequestBody CountryRequest countryRequest
                 )
     {
+        log.info("data country inserting with request "+countryRequest);
+
         // membuat object country mengunakan mapper functional
         Country country = countryService
                                     .create(
@@ -144,6 +149,8 @@ public class CountryController {
                 @Valid @RequestBody CountryRequest countryRequest
             )
     {
+        log.info("data country update with request "+countryRequest);
+
         // mapping data
         // new means country contains data update
         Country countryNew = countryRequestMapper.apply(countryRequest);

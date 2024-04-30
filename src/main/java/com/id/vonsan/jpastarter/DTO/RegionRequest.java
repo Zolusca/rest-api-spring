@@ -7,9 +7,9 @@ public class RegionRequest {
     @NotBlank(message = "name cannot be blank")
     @Size
     (
-        max = 25,
-        min = 5,
-        message = "name size atleast min 5 and max 25 characther"    
+        max = 10,
+        min = 3,
+        message = "name size atleast min 3 and max 10 characther"    
     )
     private String name;
     
@@ -29,5 +29,11 @@ public class RegionRequest {
         this.name = name.substring(0,1)
                         .toUpperCase()+name.substring(1);
     }
+
+    @Override
+    public String toString() {
+        return "RegionRequest [name=" + name + "]";
+    }
+    
     
 }

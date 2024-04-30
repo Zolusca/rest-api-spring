@@ -1,14 +1,13 @@
 package com.id.vonsan.jpastarter.Service.ServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.id.vonsan.jpastarter.Entity.Country;
+import com.id.vonsan.jpastarter.Exception.AlreadyExistException;
+import com.id.vonsan.jpastarter.Exception.NotFoundException;
 import com.id.vonsan.jpastarter.Repository.CountryRepository;
 import com.id.vonsan.jpastarter.Service.ServiceGeneric;
 
@@ -23,10 +22,9 @@ public class CountryService implements ServiceGeneric<Country,Integer>{
         // cek data country apakah ada dari code dan name
         if(countryRepository.existsByCode(country.getCode()))
            {
-               throw new ResponseStatusException
+               throw new AlreadyExistException
                     (
-                        HttpStatus.CONFLICT,
-                        "Code or name already exist"
+                        "Code or name already exist "
                     );
            }
 
@@ -55,11 +53,8 @@ public class CountryService implements ServiceGeneric<Country,Integer>{
                                 .findById(id)
                                 .orElseThrow
                                 (
-                                    ()->new ResponseStatusException
-                                    (
-                                        HttpStatus.NOT_FOUND,
-                                        "Country Not found"
-                                    ));
+                                    ()->new NotFoundException("data tidak ditemukan")
+                                );
                                             
         return country;
     }

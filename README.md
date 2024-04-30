@@ -23,9 +23,8 @@ berikut sample schema api yang diinginkan
     ```json
      {
        "status": "NOT_FOUND/OK",
-       "message": "success insert",
        "errors": {
-                   
+                  
                }
      }  
     ```

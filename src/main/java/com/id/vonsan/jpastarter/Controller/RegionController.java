@@ -23,11 +23,14 @@ import com.id.vonsan.jpastarter.DTO.ResponseHandler;
 import com.id.vonsan.jpastarter.Entity.Region;
 import com.id.vonsan.jpastarter.Service.ServiceImpl.RegionService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 
 // TODO - membuat mapper region response dengan status
 @RestController
 @RequestMapping(path = "/regions")
+@Slf4j
 public class RegionController {
 
     @Autowired
@@ -44,6 +47,8 @@ public class RegionController {
                     @RequestBody RegionRequest regionRequest
             )
     {
+        log.info("data region inserting with request "+regionRequest);
+
         // mapper object region
         Region region = new Region();
         region.setName(regionRequest.getName());
@@ -107,6 +112,8 @@ public class RegionController {
                 @Valid @RequestBody RegionRequest regionRequest
             )
     {
+        log.info("data region update with request "+regionRequest);
+
         // mendapatkan data
         Region region = regionService.getById(id);
 
